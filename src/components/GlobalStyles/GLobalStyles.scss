@@ -3,16 +3,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,500;0,600;0,700;1,400&display=swap');
 :root {
     --primary: #fe2c55;
+    --default-layout-header-height : 60px;
+    --default-layout-width : 1150px;
+    --black : #000;
 }
 html {
     font-size: 62.5%;
 }
 *{
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 body {
     font-family: 'Poppins', sans-serif;
     font-size: 1.6rem;
     line-height: 1.5;
     text-rendering: optimizeSpeed;
+}
+button,input{
+    outline: none;
+    border : none;
+}
+a[href]{
+    color : var(--text-color);
+    text-decoration: none;
 }
