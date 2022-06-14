@@ -5,8 +5,8 @@ import { Wrapper as PopperWrapper } from '~/components/poper';
 import MenuItem from './MenuItem';
 import Header from './header';
 import { useState } from 'react';
-const defaultFn = () => {}
-function Menu({ children, items = [] ,onChange}) {
+const defaultFn = () => {};
+function Menu({ children, items = [], onChange }) {
     const [history, setHistory] = useState([{ data: items }]);
     const current = history[history.length - 1];
 
@@ -20,9 +20,8 @@ function Menu({ children, items = [] ,onChange}) {
                     onClick={() => {
                         if (isParent) {
                             setHistory((prev) => [...prev, item.children]);
-                        }
-                        else {
-                            onChange(item)
+                        } else {
+                            onChange(item);
                         }
                     }}
                 />
@@ -32,6 +31,7 @@ function Menu({ children, items = [] ,onChange}) {
     const cx = classNames.bind(styles);
     return (
         <Tippy
+        offset={[10,10]}
             interactive
             // visible
             placement="bottom-end"
@@ -51,6 +51,9 @@ function Menu({ children, items = [] ,onChange}) {
                     </PopperWrapper>
                 </div>
             )}
+            onHide={() => {
+                setHistory(prev => prev.slice(0, 1));
+            }}
         >
             {children}
         </Tippy>
