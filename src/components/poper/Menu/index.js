@@ -9,7 +9,6 @@ const defaultFn = () => {};
 function Menu({ children, items = [], onChange }) {
     const [history, setHistory] = useState([{ data: items }]);
     const current = history[history.length - 1];
-
     const renderItems = () => {
         return current.data.map((item, index) => {
             const isParent = !!item.children;
@@ -31,7 +30,7 @@ function Menu({ children, items = [], onChange }) {
     const cx = classNames.bind(styles);
     return (
         <Tippy
-        offset={[10,10]}
+            offset={[10, 10]}
             interactive
             // visible
             placement="bottom-end"
@@ -52,7 +51,7 @@ function Menu({ children, items = [], onChange }) {
                 </div>
             )}
             onHide={() => {
-                setHistory(prev => prev.slice(0, 1));
+                setHistory((prev) => prev.slice(0, 1));
             }}
         >
             {children}

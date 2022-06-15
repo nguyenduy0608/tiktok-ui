@@ -13,81 +13,7 @@
     justify-content: space-between;
     padding: 0 24px;
 }
-.logo {
-}
-.search {
-    width: 361px;
-    height: 46px;
-    background-color: rgba(22, 24, 35, 0.06);
-    border-radius: 92px;
-    padding-left: 16px;
-    display: flex;
-    position: relative;
-    border: 1.5px solid rgba(22, 24, 35, 0.06);
-
-    input {
-        font-size: 16px;
-        color: var(--black);
-        border: none;
-        background-color: transparent;
-        caret-color: var(--primary);
-        height: 100%;
-        flex: 1;
-        outline: none;
-    }
-    input:not(:placeholder-shown) ~ .search-btn {
-        color: rgba(22, 24, 35, 0.75);
-    }
-    & ::after {
-        content: '';
-        position: absolute;
-        height: 28px;
-        width: 1px;
-        background-color: rgba(22, 24, 35, 0.12);
-        top: 9px;
-        right: 52px;
-    }
-    &:focus-within {
-        border: 1.5px solid rgba(22, 24, 35, 0.2);
-    }
-    .search-btn {
-        font-size: 20px;
-        width: 52px;
-        height: 100%;
-        border: none;
-        border-top-right-radius: 92px;
-        border-bottom-right-radius: 92px;
-        color: rgba(22, 24, 35, 0.34);
-        &:active {
-            background-color: rgba(22, 24, 35, 0.06);
-        }
-    }
-    .search-btn:hover {
-        background-color: rgba(22, 24, 35, 0.03);
-        cursor: pointer;
-    }
-}
-.spinner ,.clear{
-    border: none;
-    font-size: 16px;
-    right: 62px;
-    margin-top: 14px;
-    color: rgba(22, 24, 35, 0.34);
-    padding-right:  16px;
-    position: absolute;
-}
-.search-result{
-    width: 361px;
-
-}
-.search-tittle {
-    padding: 5px 12px;
-    font-size: 14px;
-    line-height: 20px;
-    font-weight: 600;
-    color: rgba(22, 24, 35, 0.5);
-}
-.more-btn{
+.more-btn {
     font-size: 20px;
     margin-left: 28px;
     background-color: white;
@@ -95,23 +21,21 @@
     cursor: pointer;
 }
 // menu
-.menu-items{
+.menu-items {
     width: 223px;
-    
 }
-.action{
+.action {
     display: flex;
     align-items: center;
 }
-.action-btn{
+.action-btn {
     background-color: white;
     font-size: 24px;
     color: #161823;
     padding: 4px 14px;
     cursor: pointer;
-
 }
-.user-avt{
+.user-avt {
     width: 32px;
     height: 32px;
     object-fit: cover;

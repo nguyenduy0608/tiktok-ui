@@ -1,32 +1,26 @@
 import styles from './Header.module.scss';
 import classNames from 'classnames/bind';
 import 'tippy.js/dist/tippy.css';
-import HeadlessTippy from '@tippyjs/react/headless';
 import Tippy from '@tippyjs/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState, useEffect } from 'react';
 import {
     faCircleQuestion,
-    faCircleXmark,
     faCloudUpload,
     faCoins,
     faEarthAsia,
     faEllipsisVertical,
     faGear,
     faKeyboard,
-    faLanguage,
-    faMagnifyingGlass,
     faMessage,
     faSignOut,
-    faSpinner,
-    faUpload,
     faUser,
 } from '@fortawesome/free-solid-svg-icons';
-import { Wrapper as PopperWrapper } from '~/components/poper';
 import Button from '~/components/Button';
-import AccountItem from '../AccountsItem';
 import Menu from '~/components/poper/Menu';
 import 'tippy.js/dist/tippy.css';
+import { faFacebookMessenger } from '@fortawesome/free-brands-svg-icons';
+import Search from '~/components/Layouts/components/search';
 const cx = classNames.bind(styles);
 const MENU_ITEMS = [
     {
@@ -65,6 +59,7 @@ function Header() {
             setSearchReults([]);
         }, 3000);
     }, []);
+
     const handleMenuChange = (menuItem) => {
         switch (menuItem.type) {
             case 'language':
@@ -93,7 +88,7 @@ function Header() {
             icon: <FontAwesomeIcon icon={faSignOut} />,
             title: 'Log out',
             to: '/feedback',
-            separate : true,
+            separate: true,
         },
     ];
     const currentUser = true;
@@ -172,35 +167,8 @@ function Header() {
                         </defs>
                     </svg>
                 </div>
-                <HeadlessTippy
-                    interactive
-                    visible={searchReults.length > 0}
-                    render={(attrs) => (
-                        <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                            <PopperWrapper>
-                                <h4 className={cx('search-tittle')}>Accounts</h4>
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                            </PopperWrapper>
-                        </div>
-                    )}
-                >
-                    <div className={cx('search')}>
-                        <input placeholder="search account and videos" spellCheck={false} />
-
-                        <FontAwesomeIcon className={cx('clear')} icon={faCircleXmark} />
-
-                        {/* loading */}
-                        <FontAwesomeIcon className={cx('spinner')} icon={faSpinner} />
-
-                        <button className={cx('search-btn')}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        </button>
-                    </div>
-                </HeadlessTippy>
+                <Search />
+            
                 <div className={cx('action')}>
                     {currentUser ? (
                         <>
@@ -209,6 +177,12 @@ function Header() {
                                     <FontAwesomeIcon icon={faCloudUpload} />
                                 </button>
                             </Tippy>
+                            <button className={cx('action-btn')}>
+                                <FontAwesomeIcon icon={faMessage} />
+                            </button>
+                            <button className={cx('action-btn')}>
+                                <FontAwesomeIcon icon={faFacebookMessenger} />
+                            </button>
                         </>
                     ) : (
                         <>
@@ -216,7 +190,7 @@ function Header() {
                             <Button primary>Log in</Button>
                         </>
                     )}
-                    <Menu items={ currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
+                    <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
                         {currentUser ? (
                             <img
                                 className={cx('user-avt')}
