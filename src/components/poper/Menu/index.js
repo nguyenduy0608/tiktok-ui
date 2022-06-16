@@ -6,7 +6,7 @@ import MenuItem from './MenuItem';
 import Header from './header';
 import { useState } from 'react';
 const defaultFn = () => {};
-function Menu({ children, items = [], onChange }) {
+function Menu({ children, items = [], hideOnClick = false, onChange }) {
     const [history, setHistory] = useState([{ data: items }]);
     const current = history[history.length - 1];
     const renderItems = () => {
@@ -34,6 +34,7 @@ function Menu({ children, items = [], onChange }) {
             interactive
             // visible
             placement="bottom-end"
+            hideOnClick = {hideOnClick}
             delay={[0, 500]}
             render={(attrs) => (
                 <div className={cx('menu-list')} tabIndex="-1" {...attrs}>

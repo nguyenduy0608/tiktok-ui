@@ -21,6 +21,7 @@ import Menu from '~/components/poper/Menu';
 import 'tippy.js/dist/tippy.css';
 import { faFacebookMessenger } from '@fortawesome/free-brands-svg-icons';
 import Search from '~/components/Layouts/components/search';
+import { Link } from 'react-router-dom';
 const cx = classNames.bind(styles);
 const MENU_ITEMS = [
     {
@@ -95,7 +96,7 @@ function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <div className={cx('logo')}>
+                <Link to = "/" className={cx('logo')}>
                     <svg height="42" width="118" alt="TikTok">
                         <g clipPath="url(#clip0)">
                             <path
@@ -166,7 +167,7 @@ function Header() {
                             </clipPath>
                         </defs>
                     </svg>
-                </div>
+                </Link>
                 <Search />
 
                 <div className={cx('action')}>
