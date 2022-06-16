@@ -1,11 +1,14 @@
 import { faCircleXmark, faMagnifyingGlass, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import HeadlessTippy from '@tippyjs/react/headless';
-import classNames from 'classnames/bind';
+import { useDebounce } from '~/hooks';
 import { useEffect, useRef, useState } from 'react';
 import { Wrapper as PopperWrapper } from '~/components/poper';
+
 import AccountItem from '../AccountsItem';
+import request from '~/utils/reques';
 import styles from './search.module.scss';
+import HeadlessTippy from '@tippyjs/react/headless';
+import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
 function Search() {
@@ -14,24 +17,30 @@ function Search() {
     const [showResult, setShowResult] = useState(true);
     const [loading, setLoading] = useState(false);
 
+    const debounced = useDebounce(searchValue, 500);
     const Ref = useRef();
     useEffect(() => {
-        if (!searchValue.trim()) {
-            setSearchResults([])
+        if (!debounced.trim()) {
+            setSearchResults([]);
             return;
         }
-        setLoading(true)
-
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
-            .then((res) => res.json())
-            .then((res) => {
-                setSearchResults(res.data);
-                setLoading(false)
-            })
-            .catch(() => {
-                setLoading(false)
-            })
-    }, [searchValue]);
+        setLoading(true);
+        const fetchApi = async () => {
+            try {
+                const res = await request.get('users/search', {
+                    params: {
+                        q: encodeURIComponent(debounced),
+                        type: 'less',
+                    },
+                });
+                setSearchResults(res.data.data);
+                setLoading(false);
+            } catch (error) {
+                setLoading(false);
+            }
+        };
+        fetchApi();
+    }, [debounced]);
     const hanldeHideResults = () => {
         setShowResult(false);
     };
@@ -55,14 +64,14 @@ function Search() {
                 <input
                     ref={Ref}
                     value={searchValue}
-                    placeholder="search account and videos"
+                    placeholder="search accounts and videos"
                     spellCheck={false}
                     onChange={(e) => setSearchValue(e.target.value)}
                     onFocus={() => {
                         setShowResult(true);
                     }}
                 />
-                {(!!searchValue && !loading ) && (
+                {!!searchValue && !loading && (
                     <FontAwesomeIcon
                         className={cx('clear')}
                         icon={faCircleXmark}
@@ -74,7 +83,7 @@ function Search() {
                     />
                 )}
 
-                {  loading  && <FontAwesomeIcon className={cx('spinner')} icon={faSpinner} />}
+                {loading && <FontAwesomeIcon className={cx('spinner')} icon={faSpinner} />}
                 <button className={cx('search-btn')}>
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </button>

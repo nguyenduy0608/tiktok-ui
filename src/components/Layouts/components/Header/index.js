@@ -168,7 +168,7 @@ function Header() {
                     </svg>
                 </div>
                 <Search />
-            
+
                 <div className={cx('action')}>
                     {currentUser ? (
                         <>
@@ -177,12 +177,16 @@ function Header() {
                                     <FontAwesomeIcon icon={faCloudUpload} />
                                 </button>
                             </Tippy>
-                            <button className={cx('action-btn')}>
-                                <FontAwesomeIcon icon={faMessage} />
-                            </button>
-                            <button className={cx('action-btn')}>
-                                <FontAwesomeIcon icon={faFacebookMessenger} />
-                            </button>
+                            <Tippy content="Message" trigger="click">
+                                <button className={cx('action-btn')}>
+                                    <FontAwesomeIcon icon={faMessage} />
+                                </button>
+                            </Tippy>
+                            <Tippy content="Inbox" trigger="click">
+                                <button className={cx('action-btn')}>
+                                    <FontAwesomeIcon icon={faFacebookMessenger} />
+                                </button>
+                            </Tippy>
                         </>
                     ) : (
                         <>
